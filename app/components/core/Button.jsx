@@ -150,7 +150,7 @@ export function Button({
     );
   } else if (variant === "flat") {
     return (
-      <FlatButton {...{ href, size, className, fullWidth }}>
+      <FlatButton {...{ href, size, className, fullWidth, ...rest }}>
         {children}
       </FlatButton>
     );

@@ -101,7 +101,7 @@
   "datatable-empty": "No items to display",
   "cards-edit": "Edit",
   "create": "Create",
-  "datatable-new": "New",
+  "datatable-new": "Add new",
   "datatable-edit": "Edit",
   "datatable-delete": "Delete",
   "datatable-search": "Search",
@@ -123,6 +123,7 @@
   "lunchTimings": "Lunch Timings",
   "eveningSnacksTimings": "Evening Snacks Timings",
   "dinnerTimings": "Dinner Timings",
+  "food": "Food",
   "note": "Note",
 
   "price": "Price",

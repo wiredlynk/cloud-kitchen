@@ -637,6 +637,10 @@ video {
   right: 0px;
 }
 
+.top-24 {
+  top: 6rem;
+}
+
 .z-30 {
   z-index: 30;
 }
@@ -1112,6 +1116,11 @@ video {
   padding-bottom: 2.5rem;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .pt-48 {
   padding-top: 12rem;
 }
@@ -1154,6 +1163,10 @@ video {
 
 .pr-2 {
   padding-right: 0.5rem;
+}
+
+.pl-0 {
+  padding-left: 0px;
 }
 
 .text-left {
@@ -1500,12 +1513,20 @@ video {
     display: flex;
   }
 
+  .md\:hidden {
+    display: none;
+  }
+
   .md\:min-h-screen {
     min-height: 100vh;
   }
 }
 
 @media (min-width: 1024px) {
+  .lg\:hidden {
+    display: none;
+  }
+
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

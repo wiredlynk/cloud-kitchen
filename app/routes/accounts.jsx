@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { json, redirect } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 import { getUserId } from "~/sessions/auth.session";
@@ -17,11 +18,17 @@ export const loader = async ({ request }) => {
 };
 
 export default function Accounts() {
+  const [openSidebar, setOpenSidebar] = useState(false);
+
+  const setSidebar = (status) => {
+    setOpenSidebar(status);
+  };
+
   return (
     <>
-      <Sidebar />
+      <Sidebar setSidebar={openSidebar} />
       <div className="md:ml-36">
-        <Header />
+        <Header setSidebar={setSidebar} />
         <Outlet />
       </div>
     </>
