@@ -6,12 +6,13 @@ const outlineButtonClass =
   "border text-primary hover:bg-primary/[.08] border-primary hover:border-primary";
 const solidButtonClass =
   "bg-primary dark:bg-gray-700 text-white hover:primary/[.2]";
+const dangerColor = "bg-red-600 dark:bg-red-400 text-white hover:red-600/[.2]";
 
 const flatButtonClass = () => "px-2 text-primary hover:primary/[.35]";
 
 const sizeClass = (size) => {
   return size === "small"
-    ? "rounded-lg leading-10 h-10 px-4"
+    ? "rounded-lg leading-9 h-9 px-3"
     : "rounded-xl leading-10 h-14 py-1.5 px-8";
 };
 
@@ -82,12 +83,13 @@ function SolidButton({
   fullWidth,
   size = "",
   className = "",
+  color,
   children,
   ...rest
 }) {
-  const defaultClassName = `${defaultClass} ${className} ${sizeClass(
-    size
-  )} ${solidButtonClass} ${fullWidth ? "w-full" : ""}`;
+  const defaultClassName = `${defaultClass} ${className} ${sizeClass(size)} ${
+    color === "danger" ? dangerColor : solidButtonClass
+  } ${fullWidth ? "w-full" : ""}`;
 
   if (href) {
     return (
@@ -140,6 +142,7 @@ export function Button({
   size = "",
   variant = "",
   className = "",
+  color = "",
   ...rest
 }) {
   if (variant === "link") {
@@ -156,13 +159,13 @@ export function Button({
     );
   } else if (variant === "outline") {
     return (
-      <OutlineButton {...{ href, size, className, fullWidth, ...rest }}>
+      <OutlineButton {...{ href, size, className, fullWidth, color, ...rest }}>
         {children}
       </OutlineButton>
     );
   } else {
     return (
-      <SolidButton {...{ href, size, fullWidth, className, ...rest }}>
+      <SolidButton {...{ href, size, fullWidth, className, color, ...rest }}>
         {children}
       </SolidButton>
     );

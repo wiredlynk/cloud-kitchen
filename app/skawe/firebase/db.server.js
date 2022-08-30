@@ -1,4 +1,5 @@
 import { getFirestore } from "firebase-admin/firestore";
+import { createUser } from "~/skawe/firebase/user.server";
 
 // helper function to convert firestore data to typescript
 const converter = () => ({
@@ -32,13 +33,26 @@ export const getDoc = async (category, docId) => {
   return docSnap.data();
 };
 
-export const addDoc = async (category, data) => {
-  const newDocRef = db.modules(category);
-  await newDocRef.add(data);
+export const addDoc = async (category, data, addUser) => {
+  if (addUser) {
+    const newDocRef = db.modules(category);
+    await newDocRef.add(data);
+    const setUserData = {
+      email: data["email"],
+      password: data["password"],
+      displayName: data["name"],
+      __collection: data["__collection"],
+    };
+    await createUser(setUserData, addUser);
+  } else {
+    const newDocRef = db.modules(category);
+    await newDocRef.add(data);
+  }
 };
 
 export const editDoc = async (category, docId, data) => {
   const docSnap = await db.modules(category).doc(docId);
+  Object.keys(data).forEach((k) => data[k] == null && delete data[k]);
   await docSnap.update({ ...data });
 };
 

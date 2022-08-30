@@ -1,4 +1,4 @@
-import { Input, Textarea } from "~/components";
+import { Input, Radio, Textarea } from "~/components";
 
 const FormComponent = (props) => {
   switch (props.type) {
@@ -8,6 +8,8 @@ const FormComponent = (props) => {
       return <Input {...props} />;
     case "textarea":
       return <Textarea {...props} />;
+    case "radio":
+      return <Radio {...props} />;
     default:
       return <Input {...props} />;
   }

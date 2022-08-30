@@ -23,7 +23,7 @@ export const action = async ({ request }) => {
   const photoURL = formData.get("photoURL");
   const userModifier = {
     displayName,
-    phoneNumber,
+    phoneNumber: `+91${phoneNumber}`,
     email,
     photoURL,
   };
@@ -47,7 +47,7 @@ export default function Profile() {
     transition.state === "submitting"
       ? "saving..."
       : transition.state === "loading"
-      ? loadTexts[transition.type] || "loading..."
+      ? loadTexts[transition.type] || "loading"
       : "save";
 
   return (

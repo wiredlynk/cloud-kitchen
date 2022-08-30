@@ -1,5 +1,6 @@
 const hotels = {
   collection: "hotels",
+  createUser: true,
   fields: {
     // ID
     id: {
@@ -11,11 +12,32 @@ const hotels = {
       type: "text",
       required: true,
       publish: true,
+      description: "example: Hotel name",
     },
+    owner: {
+      type: "text",
+      required: true,
+      publish: true,
+    },
+    // Phone number
     phoneNumber: {
       type: "tel",
       min: 10,
       max: 12,
+      // required: true,
+    },
+    // Email address
+    email: {
+      type: "email",
+      required: true,
+      publish: true,
+      description: "example: abc@abc.com",
+    },
+    // Email address
+    password: {
+      type: "password",
+      required: true,
+      publish: true,
     },
     address: {
       type: "textarea",

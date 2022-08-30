@@ -27,6 +27,7 @@ export * from "./users/UsersMenu";
 // Forms
 export * from "./forms/Forms";
 export * from "./forms/Input";
+export * from "./forms/Radio";
 export * from "./forms/Textarea";
 
 // Datatable

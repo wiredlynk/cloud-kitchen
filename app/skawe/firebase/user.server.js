@@ -7,6 +7,7 @@ import { auth } from "~/skawe/firebase/firebase.server";
  */
 const ONE_WEEK_IN_MS = 7 * 60 * 60 * 24;
 
+// Sign in
 export const signIn = async (email, password) => {
   const { idToken } = await auth.signInWithPassword(email, password);
   return signInWithToken(idToken);
@@ -19,15 +20,27 @@ export const signInWithToken = async (idToken) => {
   });
 };
 
-export const createUser = async (email, password) => {
-  await auth.server.createUser({
-    email,
-    password,
-    displayName: email.slice(0, email.indexOf("@")),
-  });
-  return await signIn(email, password);
+// Create user
+export const createUser = async (userData, fromAdmin) => {
+  if (fromAdmin) {
+    const role = userData.__collection;
+    if (userData["__collection"]) {
+      delete userData["__collection"];
+    }
+    const newUser = await auth.server.createUser({ ...userData });
+    await auth.server.setCustomUserClaims(newUser.uid, { role });
+  } else {
+    const { email, password } = userData;
+    await auth.server.createUser({
+      email,
+      password,
+      displayName: email.slice(0, email.indexOf("@")),
+    });
+    return await signIn(email, password);
+  }
 };
 
+// Update users
 export async function updateUser(userId, data) {
   return await auth.server.updateUser(userId, data);
 }

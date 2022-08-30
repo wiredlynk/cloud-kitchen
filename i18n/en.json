@@ -127,5 +127,10 @@
   "note": "Note",
 
   "price": "Price",
-  "address": "Address"
+  "address": "Address",
+
+  "owner": "Owner",
+
+  "data_saved_redirecting": "Data saved, redirecting...",
+  "data_saved_fresh": "Data saved, reloading fresh data..."
 }

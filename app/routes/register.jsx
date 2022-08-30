@@ -29,6 +29,10 @@ export const action = async ({ request }) => {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
+  const userData = {
+    email,
+    password,
+  };
   const redirectTo = safeRedirect(
     formData.get("redirectTo"),
     "/accounts/dashboard"
@@ -55,19 +59,8 @@ export const action = async ({ request }) => {
     );
   }
 
-  /** 
-   * check user available with provided email
-    const existingUser = await getUserByEmail(email);
-    if (existingUser) {
-    return json(
-      { errors: { email: "A user already exists with this email" } },
-      { status: 400 }
-    );
-    }
-  */
-
   // 5. Create user to db
-  const user = await createUser(email, password);
+  const user = await createUser(userData);
   // 6. Create user to session
   return createUserSession({
     request,

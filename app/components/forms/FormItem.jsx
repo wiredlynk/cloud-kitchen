@@ -4,13 +4,14 @@
 import { memo } from "react";
 import { FormattedMessage } from "~/components";
 
-const FieldLabel = ({ name, errorMessage, className = "" }) => (
+const FieldLabel = ({ name, required, errorMessage, className = "" }) => (
   <span
     className={`text-base font-medium ${
       errorMessage ? "text-danger" : "text-gray-600 dark:text-gray-300"
     } ${className}`}
   >
-    <FormattedMessage id={name} />
+    <FormattedMessage id={name} />{" "}
+    {required && <span className="text-red-600">*</span>}
   </span>
 );
 
@@ -24,7 +25,7 @@ const FieldError = ({ error }) => {
   return <span className="text-xs font-medium text-danger">{error}</span>;
 };
 
-const InputOnly = ({ description, errorMessage, children }) => (
+const InputOnly = ({ description, required, errorMessage, children }) => (
   <div className="mb-4">
     <div className="relative block">{children}</div>
     {description ? <FieldDescription description={description} /> : null}
@@ -32,10 +33,16 @@ const InputOnly = ({ description, errorMessage, children }) => (
   </div>
 );
 
-const InputVertical = ({ name, description, errorMessage, children }) => (
+const InputVertical = ({
+  name,
+  description,
+  required,
+  errorMessage,
+  children,
+}) => (
   <div className="mb-4">
     <label className="relative block">
-      <FieldLabel {...{ name, errorMessage }} />
+      <FieldLabel {...{ name, required, errorMessage }} />
       {children}
     </label>
     {description ? <FieldDescription description={description} /> : null}
@@ -43,10 +50,16 @@ const InputVertical = ({ name, description, errorMessage, children }) => (
   </div>
 );
 
-const InputHorizontal = ({ name, description, errorMessage, children }) => (
+const InputHorizontal = ({
+  name,
+  description,
+  required,
+  errorMessage,
+  children,
+}) => (
   <label className="relative block mb-4">
     <span className="flex items-center">
-      <FieldLabel className="w-48" {...{ name, errorMessage }} />
+      <FieldLabel className="w-48" {...{ name, required, errorMessage }} />
       {children}
     </span>
     {description ? <FieldDescription description={description} /> : null}
@@ -56,6 +69,7 @@ const InputHorizontal = ({ name, description, errorMessage, children }) => (
 
 const FormItem = ({
   name,
+  required,
   description,
   errorMessage,
   layout = "vertical",
@@ -63,18 +77,22 @@ const FormItem = ({
 }) => {
   if (layout === "inputOnly") {
     // input only layout
-    return <InputOnly {...{ description, errorMessage }}>{children}</InputOnly>;
+    return (
+      <InputOnly {...{ description, required, errorMessage }}>
+        {children}
+      </InputOnly>
+    );
   } else if (layout === "vertical") {
     // vertical layout
     return (
-      <InputVertical {...{ name, description, errorMessage }}>
+      <InputVertical {...{ name, description, required, errorMessage }}>
         {children}
       </InputVertical>
     );
   } else {
     // horizontal layout (default)
     return (
-      <InputHorizontal {...{ name, description, errorMessage }}>
+      <InputHorizontal {...{ name, description, required, errorMessage }}>
         {children}
       </InputHorizontal>
     );

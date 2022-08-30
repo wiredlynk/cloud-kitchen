@@ -1,20 +1,47 @@
 const kitchens = {
   collection: "kitchens",
+  createUser: true,
   fields: {
     // ID
     id: {
       type: "text",
       optional: true,
     },
-    title: {
+    name: {
       type: "text",
       required: true,
       publish: true,
+      description: "example: Kitchen/Restaurant name",
     },
     description: {
       type: "textarea",
       min: 10,
       max: 200,
+      publish: true,
+    },
+    owner: {
+      type: "text",
+      required: true,
+      publish: true,
+    },
+    // Phone number
+    phoneNumber: {
+      type: "tel",
+      min: 10,
+      max: 12,
+      // required: true,
+    },
+    // Email address
+    email: {
+      type: "email",
+      required: true,
+      publish: true,
+      description: "example: abc@abc.com",
+    },
+    // Email address
+    password: {
+      type: "password",
+      required: true,
       publish: true,
     },
     // Breakfast timings

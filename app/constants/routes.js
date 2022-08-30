@@ -32,6 +32,7 @@ export const routes = {
     {
       label: "Kitchens",
       href: "/admin/kitchens/list",
+      role: "admin",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,6 +58,7 @@ export const routes = {
     {
       label: "menu",
       href: "/admin/menu/list",
+      role: "admin",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -77,6 +79,7 @@ export const routes = {
     {
       label: "food",
       href: "/admin/food/list",
+      role: "admin",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -97,6 +100,7 @@ export const routes = {
     {
       label: "Hotels",
       href: "/admin/hotels/list",
+      role: "admin",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"

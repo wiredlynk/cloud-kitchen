@@ -8,7 +8,6 @@ const settings = {
     phoneNumber: {
       type: "tel",
       min: 10,
-      max: 12,
       // pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
     },
     email: {

@@ -1,4 +1,4 @@
 export const loadTexts = {
-  actionRedirect: "Data saved, redirecting...",
-  actionReload: "Data saved, reloading fresh data...",
+  actionRedirect: "data_saved_redirecting",
+  actionReload: "data_saved_fresh",
 };

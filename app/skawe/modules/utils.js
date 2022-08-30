@@ -45,3 +45,16 @@ export const getEditableFields = function (schema, user, document) {
   });
   return fields;
 };
+
+export const getFormFields = (schema) => {
+  // get all editable/insertable fields (depending on current form type)
+  let publishedFields = {};
+  Object.entries(schema).forEach(([key, value]) => {
+    if (!value.hasOwnProperty("optional")) {
+      publishedFields[key] = value;
+    }
+    return value.hasOwnProperty("optional");
+  });
+
+  return Object.keys(publishedFields); // prints array relevantFields  (4) ['title', 'content', 'image', 'department']
+};

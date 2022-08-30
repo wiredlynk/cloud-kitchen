@@ -1,7 +1,7 @@
 import { /* useState, */ forwardRef } from "react";
 import { Form, useTransition } from "@remix-run/react";
 import { FormattedMessage, Button } from "~/components";
-import { deepValue } from "~/skawe/modules/utils";
+import { deepValue, getFormFields } from "~/skawe/modules/utils";
 import FormGroup from "./FormGroup";
 
 const formFieldset = {
@@ -17,31 +17,26 @@ export const FormWrapper = forwardRef((props, ref) => {
   const {
     document,
     schema,
-    collection,
     actionData,
     layout = "vertical",
     buttonText = "submit",
   } = props;
 
+  // when the form is being processed on the server, this returns different
+  // transition states to help us build pending and optimistic UI.
+  const transition = useTransition();
+
   // return the current schema based on either the schema or collection prop
-  const getSchema = () => (schema ? schema.fields : collection.schema);
+  const getSchema = () => (schema ? schema.fields : null);
+
+  // Stop form to execute, if schema is not available.
+  if (getSchema() === null) return;
 
   // if a document is being passed, this is an update form
   const getFormType = () => (document ? "update" : "create");
 
   // get form fields
-  const getFieldNames = () => {
-    // get all editable/insertable fields (depending on current form type)
-    let publishedFields = {};
-    Object.entries(getSchema()).forEach(([key, value]) => {
-      if (!value.hasOwnProperty("optional")) {
-        publishedFields[key] = value;
-      }
-      return value.hasOwnProperty("optional");
-    });
-
-    return Object.keys(publishedFields); // prints array relevantFields  (4) ['title', 'content', 'image', 'department']
-  };
+  const getFieldNames = () => getFormFields(getSchema());
 
   // get group names associated to field names
   const getFieldGroups = () => {
@@ -150,9 +145,6 @@ export const FormWrapper = forwardRef((props, ref) => {
 
   const fieldGroups = getFieldGroups();
   const { method, action } = props;
-  // when the form is being processed on the server, this returns different
-  // transition states to help us build pending and optimistic UI.
-  const transition = useTransition();
 
   return (
     <Form {...{ method, action, ref }} id={"document-" + getFormType()}>
