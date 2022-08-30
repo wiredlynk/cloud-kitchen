@@ -46,7 +46,7 @@ export const Modal = ({
             <div className="absolute inset-y-0 right-0 pl-10 max-w-full flex">
               <div className={`relative w-screen ${modalSize}`}>
                 {showCloseButton && (
-                  <div className="absolute top-0 left-0 -ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4">
+                  <div className="absolute top-0 left-0 -ml-8 pt-6 pr-4 flex sm:-ml-10 sm:pr-4">
                     <button
                       className="rounded-md text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
                       onClick={onHide}

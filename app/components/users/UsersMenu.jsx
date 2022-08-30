@@ -20,7 +20,7 @@ export const UsersMenu = ({ currentUser }) => {
         <>
           <UsersAvatar user={currentUser} />
           <svg
-            className="h-5 w-5 ml-1 dark:text-gray-400"
+            className="h-5 w-5 ml-1 dark:text-gray-400 hidden md:flex"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"

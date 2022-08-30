@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Row,
   Button,
   UsersMenu,
   SpacerBetween,
   FormattedMessage,
+  Logo,
 } from "~/components";
 import { routes } from "~/constants/routes";
 import { useUser } from "~/skawe/users/helpers";
@@ -26,7 +27,7 @@ const NavLinks = ({ currentUser }) => (
   </>
 );
 
-const menuIcon = (
+const menuOpenIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -43,11 +44,28 @@ const menuIcon = (
   </svg>
 );
 
-const MenuButton = ({ toggleSidebar }) => {
+const menuCloseIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="w-8 h-8"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M6 18L18 6M6 6l12 12"
+    />
+  </svg>
+);
+
+const MenuButton = ({ toggleSidebar, openSidebar }) => {
   return (
-    <Button variant="flat" className="lg:hidden px-0" onClick={toggleSidebar}>
-      {menuIcon}
-    </Button>
+    <button className="md:hidden px-0" onClick={toggleSidebar}>
+      {openSidebar ? menuCloseIcon : menuOpenIcon}
+    </button>
   );
 };
 
@@ -61,16 +79,14 @@ export const Header = ({ setSidebar }) => {
     setSidebar(!openSidebar);
   };
 
-  console.log(
-    "🚀 ~ file: Header.jsx ~ line 63 ~ Header ~ openSidebar",
-    openSidebar
-  );
-
   return (
     <nav className="w-full py-5">
       <Row>
         <div className="flex justify-between items-center">
-          <MenuButton toggleSidebar={toggleSidebar} />
+          <div className="flex">
+            <MenuButton {...{ toggleSidebar, openSidebar }} />
+            <Logo className="md:hidden pl-4 flex" />
+          </div>
           <div className="space-x-8">
             {navbar.map((menu, index) => (
               <Button variant="link" href={menu.href} key={index}>
