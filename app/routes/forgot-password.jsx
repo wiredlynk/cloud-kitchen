@@ -47,7 +47,7 @@ export default function ForgotPassword() {
       ? "resetting"
       : transition.state === "loading"
       ? loadTexts[transition.type] || "loading"
-      : "login";
+      : "reset_your_password";
 
   return (
     <HeroJumbotron

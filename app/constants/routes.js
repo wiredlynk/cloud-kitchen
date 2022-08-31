@@ -6,7 +6,7 @@
  *  }
  */
 export const routes = {
-  homePage: true,
+  homePage: false,
   navbar: [],
   sidebarBar: [
     {
@@ -30,9 +30,9 @@ export const routes = {
       ),
     },
     {
-      label: "Kitchens",
+      label: "kitchens",
       href: "/admin/kitchens/list",
-      role: "admin",
+      role: ["admin"],
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ export const routes = {
     {
       label: "menu",
       href: "/admin/menu/list",
-      role: "admin",
+      role: ["admin"],
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +79,7 @@ export const routes = {
     {
       label: "food",
       href: "/admin/food/list",
-      role: "admin",
+      role: ["admin"],
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -98,9 +98,9 @@ export const routes = {
       ),
     },
     {
-      label: "Hotels",
+      label: "hotels",
       href: "/admin/hotels/list",
-      role: "admin",
+      role: ["admin"],
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -119,14 +119,5 @@ export const routes = {
       ),
     },
   ],
-  footerBar: [
-    {
-      label: "Home",
-      href: "/",
-    },
-    {
-      label: "components",
-      href: "/components",
-    },
-  ],
+  footerBar: [],
 };

@@ -72,7 +72,7 @@ export default function Index() {
 
   const buttonText =
     transition.state === "submitting"
-      ? "logging_in"
+      ? "logging_in..."
       : transition.state === "loading"
       ? loadTexts[transition.type] || "loading"
       : "login";
@@ -90,14 +90,6 @@ export default function Index() {
             {...{ actionData, buttonText }}
           />
           <Text>
-            <FormattedMessage id="dont_have_account" />{" "}
-            <Button variant="link" href="/register" type="submit">
-              <FormattedMessage id="sign_up_here" />
-            </Button>
-            ?
-          </Text>
-
-          <Text>
             <FormattedMessage id="need_to_find_your" />{" "}
             <Button variant="link" href="/forgot-password">
               <FormattedMessage id="password" />
@@ -108,4 +100,14 @@ export default function Index() {
       }
     />
   );
+}
+
+{
+  /* <Text>
+  <FormattedMessage id="dont_have_account" />{" "}
+  <Button variant="link" href="/register" type="submit">
+    <FormattedMessage id="sign_up_here" />
+  </Button>
+  ?
+</Text> */
 }

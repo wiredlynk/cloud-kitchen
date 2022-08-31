@@ -132,5 +132,9 @@
   "owner": "Owner",
 
   "data_saved_redirecting": "Data saved, redirecting...",
-  "data_saved_fresh": "Data saved, reloading fresh data..."
+  "data_saved_fresh": "Data saved, reloading fresh data...",
+
+  "streetAddress": "Street address",
+  "pinCode": "Pin code",
+  "state": "State"
 }

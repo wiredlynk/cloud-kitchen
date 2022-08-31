@@ -24,6 +24,7 @@ const hotels = {
       type: "tel",
       min: 10,
       max: 12,
+      mustComplete: true,
       // required: true,
     },
     // Email address
@@ -39,11 +40,20 @@ const hotels = {
       required: true,
       publish: true,
     },
-    address: {
-      type: "textarea",
-      min: 10,
-      max: 300,
+    streetAddress: {
+      type: "text",
       publish: true,
+      mustComplete: true,
+    },
+    pinCode: {
+      type: "number",
+      publish: true,
+      mustComplete: true,
+    },
+    state: {
+      type: "text",
+      publish: true,
+      mustComplete: true,
     },
     // Tag Kitchen
     kitchen: {

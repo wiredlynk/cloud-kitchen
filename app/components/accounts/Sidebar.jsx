@@ -5,11 +5,7 @@ import { Logo } from "~/components";
 
 export const Sidebar = ({ setSidebar }) => {
   const { customClaims } = useUser();
-  // console.log(
-  //   "🚀 ~ file: Sidebar.jsx ~ line 8 ~ Sidebar ~ customClaims",
-  //   customClaims
-  // );
-  const navbar = routes.sidebarBar;
+  const { sidebarBar } = routes;
   const linkClassName =
     "flex flex-col w-2/4 md:w-full items-center justify-center font-medium capitalize p-6 md:p-4 hover:text-black transition";
   const activeLinkClass = "text-black";
@@ -24,20 +20,28 @@ export const Sidebar = ({ setSidebar }) => {
     >
       <Logo className="my-6 md:flex hidden" />
       <div className="flex flex-wrap p-6 md:p-0">
-        {navbar.map((menu, index) => (
-          <NavLink
-            to={menu.href}
-            key={index}
-            className={({ isActive }) =>
-              isActive
-                ? `${linkClassName} ${activeLinkClass}`
-                : `text-gray-500 ${linkClassName}`
-            }
-          >
-            {menu.icon ? menu.icon : null}
-            {menu.label}
-          </NavLink>
-        ))}
+        {sidebarBar.map((menu, index) => {
+          const routeRole = menu.role;
+          if (
+            (routeRole && routeRole.includes(customClaims.role)) ||
+            routeRole === undefined
+          ) {
+            return (
+              <NavLink
+                to={menu.href}
+                key={index}
+                className={({ isActive }) =>
+                  isActive
+                    ? `${linkClassName} ${activeLinkClass}`
+                    : `text-gray-500 ${linkClassName}`
+                }
+              >
+                {menu.icon ?? null}
+                {menu.label}
+              </NavLink>
+            );
+          }
+        })}
       </div>
     </div>
   );

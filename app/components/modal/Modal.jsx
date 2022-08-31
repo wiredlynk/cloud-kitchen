@@ -27,7 +27,7 @@ export const Modal = ({
     headerComponent = <div className="px-4 sm:px-6"></div>;
   }
 
-  const modalSize = size === "large" ? "max-w-4xl" : "max-w-lg";
+  const modalSize = size === "large" ? "max-w-4xl" : "max-w-xl";
 
   return (
     <>
