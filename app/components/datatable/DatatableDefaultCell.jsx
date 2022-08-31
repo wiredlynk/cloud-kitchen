@@ -4,7 +4,7 @@ import { FormattedMessage, Button, Input } from "~/components";
  * DatatableAbove Component
  */
 export const DatatableAbove = (props) => (
-  <div className="flex items-center place-content-between">
+  <div className="flex items-center space-x-4">
     {props.showSearch && <DatatableAboveLeft {...props} />}
     {props.showNew && <DatatableAboveRight {...props} />}
   </div>
@@ -32,7 +32,7 @@ const ActionButtons = ({ showEdit, showDelete, title, document, ...rest }) => {
   const deleteLink = `/admin/${url}/list/${document.id}/delete`;
 
   return (
-    <td className="px-6 py-4 text-sm font-medium text-gray-900 datatable-item-edit">
+    <td className="px-6 py-2 text-sm font-medium text-gray-900 datatable-item-edit">
       {showEdit ? (
         <Button variant="flat" size="small" href={editLink}>
           <svg
@@ -80,11 +80,9 @@ const ActionButtons = ({ showEdit, showDelete, title, document, ...rest }) => {
 export const DatatableHeader = ({ column }) => {
   return (
     <th
-      className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider datatable-header-${column.name}`}
+      className={`px-6 py-3 text-left text-xs font-medium text-gray-500 whitespace-nowrap uppercase tracking-wider datatable-header-${column}`}
     >
-      <div className="flex">
-        <FormattedMessage id={column} />
-      </div>
+      <FormattedMessage id={column} />
     </th>
   );
 };
@@ -98,12 +96,11 @@ export const DatatableRow = (props) => {
       {columns.map((column, index) => (
         <td
           key={index}
-          className={`px-6 py-4 text-sm font-medium text-gray-900 datatable-item-${column
+          className={`px-6 py-2 text-sm font-medium text-gray-900 whitespace-nowrap datatable-item-${column
             .toLowerCase()
             .replace(/\s/g, "-")}`}
-        >
-          <div dangerouslySetInnerHTML={{ __html: document[column] }} />
-        </td>
+          dangerouslySetInnerHTML={{ __html: document[column] }}
+        />
       ))}
       <ActionButtons {...props} />
     </tr>
