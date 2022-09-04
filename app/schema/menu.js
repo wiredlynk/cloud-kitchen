@@ -1,13 +1,18 @@
-const category = {
-  collection: "category",
+const menuGroup = {
+  name: "food",
+  order: 10,
+};
+
+const menu = {
+  collection: "menu",
   fields: {
     // ID
     id: {
       type: "text",
       optional: true,
     },
-    // Title
-    title: {
+    // Category
+    category: {
       type: "text",
       required: true,
       publish: true,
@@ -27,6 +32,30 @@ const category = {
         return new Date().toISOString();
       },
     },
+    // children: {
+    // title: {
+    //   type: "text",
+    //   required: true,
+    //   publish: true,
+    //   description: "example: Butter naan",
+    //   group: menuGroup,
+    // },
+    // price: {
+    //   type: "number",
+    //   required: true,
+    //   publish: true,
+    //   description: "example: 35",
+    //   group: menuGroup,
+    // },
+    // description: {
+    //   type: "textarea",
+    //   min: 10,
+    //   max: 200,
+    //   publish: true,
+    //   description: "example: ingredients",
+    //   group: menuGroup,
+    // },
+    // },
   },
 };
-export default category;
+export default menu;

@@ -2,6 +2,8 @@ import { json, redirect } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { ModalTrigger, Forms } from "~/components";
 import { getDoc, editDoc } from "~/skawe/firebase/db.server";
+import { getFormFields, removeNullOrEmpty } from "~/skawe/modules/utils";
+import { schema } from "~/skawe/modules/schema";
 
 export const meta = () => ({
   title: "Add New title",
@@ -19,31 +21,20 @@ export const loader = async ({ params }) => {
   return json({ category, document, id });
 };
 
-const schema = {
-  collection: "category",
-  fields: {
-    title: {
-      type: "text",
-      required: true,
-    },
-    description: {
-      type: "textarea",
-      min: 10,
-      max: 200,
-    },
-  },
-};
-
 export const action = async ({ request, params }) => {
-  // 1. Get/setup form data from the request
-  const formData = await request.formData();
-  const title = formData.get("title");
-  const description = formData.get("description");
+  // 1. set helpers
   const setCategory = params.category.toLowerCase();
   const setUid = params.id;
-  // 2. Create user to db
-  await editDoc(setCategory, setUid, { title, description });
-  // 3. Redirect to list page
+  const getSchema = schema[setCategory];
+  const fields = getFormFields(getSchema.fields);
+  // 2. Get/setup form data from the request
+  const formData = await request.formData();
+  let document = {};
+  fields.map((field) => (document[field] = formData.get(field)));
+  removeNullOrEmpty(document);
+  // 3. Create user to db
+  await editDoc(setCategory, setUid, document);
+  // 4. Redirect to list page
   return redirect(`/admin/${setCategory}/list`);
 };
 
@@ -53,7 +44,12 @@ export default function EditDoc() {
 
   return (
     <ModalTrigger title={category}>
-      <Forms replace method="post" {...{ schema, document, actionData }} />
+      <Forms
+        replace
+        method="post"
+        schema={schema[category]}
+        {...{ document, actionData }}
+      />
     </ModalTrigger>
   );
 }

@@ -29,7 +29,8 @@
 
   "code_404": "404",
   "404": "Sorry, we couldn't find what you were looking for.",
-  "loading": "Loading…",
+  "loading": "Loading...",
+  "saving": "Saving...",
   "copyright": "Copyright 2021, All rights reserved.",
   "get_started": "Ready to get started?",
   "create_account": "Create an account",
@@ -136,5 +137,7 @@
 
   "streetAddress": "Street address",
   "pinCode": "Pin code",
-  "state": "State"
+  "state": "State",
+
+  "children": "children"
 }

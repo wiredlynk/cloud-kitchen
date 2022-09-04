@@ -58,3 +58,15 @@ export const getFormFields = (schema) => {
 
   return Object.keys(publishedFields); // prints array relevantFields  (4) ['title', 'content', 'image', 'department']
 };
+
+export const removeNullOrEmpty = (document) => {
+  Object.keys(document).forEach((key) => {
+    if (
+      document[key] === null ||
+      document[key] === undefined ||
+      document[key] === ""
+    ) {
+      delete document[key];
+    }
+  });
+};

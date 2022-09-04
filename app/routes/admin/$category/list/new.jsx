@@ -1,7 +1,7 @@
 import { json, redirect } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { addAutoValue } from "~/skawe/modules/addAutoValue";
-import { getFormFields } from "~/skawe/modules/utils";
+import { getFormFields, removeNullOrEmpty } from "~/skawe/modules/utils";
 import { addDoc } from "~/skawe/firebase/db.server";
 import { schema } from "~/skawe/modules/schema";
 import { ModalTrigger, Forms } from "~/components";
@@ -30,15 +30,7 @@ export const action = async ({ request, params }) => {
   fields.map((field) => (document[field] = formData.get(field)));
   // 3. Add AutoValue
   const dataToBeAdded = await addAutoValue({ document, getSchema });
-  Object.keys(dataToBeAdded).forEach((key) => {
-    if (
-      dataToBeAdded[key] === null ||
-      dataToBeAdded[key] === undefined ||
-      dataToBeAdded[key] === ""
-    ) {
-      delete dataToBeAdded[key];
-    }
-  });
+  removeNullOrEmpty(dataToBeAdded);
   // 4. Create user to db
   await addDoc(setCategory, dataToBeAdded, addUser);
   // 5. Redirect to list page
